@@ -17,8 +17,8 @@ fn main(){
             }
             else if input == 2 {
                 println!("How much Fahrenheit?: ");
-                let farenheit = get_float();
-                println!("That will be {} in Celsius.", (farenheit - 32.0) / 1.8 );
+                let fahrenheit = get_float();
+                println!("That will be {} in Celsius.", (fahrenheit - 32.0) / 1.8 );
                 return;
             }
             else {
