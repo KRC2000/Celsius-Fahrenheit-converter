@@ -1,4 +1,7 @@
-use std::io;
+mod input;
+mod temperature;
+
+use temperature::Temperature;
 
 fn main(){
     loop {
@@ -7,65 +10,23 @@ fn main(){
         
         
         loop {
-            let input = get_num();
+            let input = input::get_num();
 
             if input == 1 {
                 println!("How much Celsius?: ");
-                let celsius = get_float();
-                println!("That will be {} in Fahrenheit.", celsius * 1.8 + 32.0);
+                let temp = Temperature::from_celsius(input::get_float());
+                println!("That will be {} in Fahrenheit.", temp.get_fahrenheit());
                 return;
             }
             else if input == 2 {
                 println!("How much Fahrenheit?: ");
-                let fahrenheit = get_float();
-                println!("That will be {} in Celsius.", (fahrenheit - 32.0) / 1.8 );
+                let temp = Temperature::from_fahrenheit(input::get_float());
+                println!("That will be {} in Celsius.", temp.get_celsius());
                 return;
             }
             else {
                 println!("No option {input}. Input number of converter you want to use.");             
             }
-        }
-    }
-}
-
-
-fn read_line() -> String {
-    let mut input = String::new();
-    loop {
-        input.clear();
-
-        match io::stdin().read_line(&mut input) {
-            Err(error) => {
-                println!("Error: {error}.");
-                continue;
-            },
-            Ok(_) => { return input; }
-        }
-    }
-}
-
-fn get_num() -> u8 {
-    loop {
-        let input = read_line();
-        match input.trim().parse::<u8>() {
-            Err(error) => { 
-                println!("Error {error}. Input number."); 
-                continue;
-            },
-            Ok(value) => { return value; }
-        }
-    }
-}
-
-fn get_float() -> f32 {
-    loop {
-        let input = read_line();
-        match input.trim().parse::<f32>() {
-            Err(error) => { 
-                println!("Error {error}. Input number."); 
-                continue;
-            },
-            Ok(value) => { return value; }
         }
     }
 }
